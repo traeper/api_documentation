@@ -1,13 +1,13 @@
 # OpenApiSpec.을 이용한 더욱 효과적인 API 문서화
 ![](resources/swagger-restdocs-love.png)
 
-API 서버를 개발하게 되면 App, Frontend 그리고 동료 백엔드 개발자와 API 형상을 공유하고 편하게 테스트할 수 있는 환경을 제공해주는 것이 협업의 첫 걸음이라고 할 수 있습니다. 
-Spring 기반 실무에선 Swagger나 REST Docs를 많이 사용하는데 각각 장점과 단점이 분명하게 있는데요. 본 글에서는 Swagger와 REST Docs의 장점만을 뽑아낸 OpenApi Spec.(OAS) 기반의 API 문서화 방법을 공유드리고자 합니다.
+API 서버를 개발하게 되면 App, Frontend 그리고 동료 Backend 개발자와 API 형상을 공유하고 편하게 테스트할 수 있는 환경 API 문서를 제공해주는 것이 협업의 첫 걸음이라고 할 수 있을 것 같습니다.
+API 문서를 만들기 위해 Swagger나 REST Docs를 많이 사용하는데요. 본 글에서는 자주 비교되곤 하는 Swagger와 REST Docs의 장점만을 뽑아낸 OpenApi Spec.(OAS) 기반의 API 문서화 방법을 공유드리고자 합니다.
  
 ## 1. API 문서화 도구
 ### 1.1. Swagger
 Swagger는 Controller에 몇 가지의 Annotation을 달기만 해도 API 문서가 만들어지는 편리함이 있지만 Test를 강제하지는 않기에 문서의 신뢰도를 높게 유지하기 어려운 문제가 있습니다.
-그럼에도 문서가 워낙 예쁘고 테스트를 돌리지 않아도 되는 간편함이 있어 많이 사용되고 있니다.
+그럼에도 문서가 워낙 예쁘고 테스트를 돌리지 않아도 되는 간편함이 있어 많이 사용되고 있습니다.
 
 | 장점 | 단점 |
 |---|---|
@@ -24,8 +24,8 @@ REST Docs는 Integration 테스트를 작성해서 통과해야만 문서가 작
 | 소스코드에 영향 없음 | API Test 기능 미지원 |
 
 ## 2. OpenApi Specification(OAS) 기반 API 문서화 
-Swagger 팀이 SmartBear에 합류하면서 Swagger Spec.이 OpenApi Spec.으로 명칭이 바뀌어 오늘날에는 RESTful API 스펙에 대한 사실상의 표준으로서 활용되고 있다고 합니다.
-Swagger-UI는 이 OAS 파일을 해석하여 API 스펙을 시각화해줍니다. 또한 Postman, Paw 같은 REST Client들도 OAS를 지원하고 있어 OAS의 활용도가 무척 다양한 것을 알 수 있습니다.
+Swagger 팀이 SmartBear에 합류하면서 Swagger Spec.이 OpenApi Spec.으로 명칭이 바뀌었고 오늘날에는 RESTful API 스펙에 대한 사실상의 표준으로서 활용되고 있다고 합니다.
+Swagger-UI는 이 OAS를 해석하여 API 스펙을 시각화해줍니다. 또한 Postman, Paw 같은 REST Client들도 OAS를 지원하고 있어 OAS의 활용도가 무척 다양한 것을 알 수 있습니다.
 
 ### 2.1. REST Docs API specification Integration
 REST Docs와 Swagger의 장점을 어떻게 합칠 수 있을까요? 운이 좋게도 독일 기업 epages에서 Spring REST Docs를 연동하여 [OAS 파일을 만들어주는 오픈소스(restdocs-api-spec)](https://github.com/ePages-de/restdocs-api-spec "")를 제공하고 있습니다. 이 오픈소스를 이용해서 OAS 파일을 생성하고 Swagger-UI로 띄우면 되는 것입니다.
@@ -36,8 +36,6 @@ REST Docs와 Swagger의 장점을 어떻게 합칠 수 있을까요? 운이 좋�
 2. restdocs-api/spec을 이용한 OAS 파일을 생성하는 빌드 환경 구축
 3. 생성된 OAS 파일을 swagger 디렉토리로 복사하는 스크립트 작성(copyOasToSwagger)
 4. MockMvc REST Docs Test 코드 작성
-
-구현 작업물은 프로젝트 소스코드로 남겨놓았으니 참고해주세요. :)
 
 #### 2.2.1. Swagger-UI standalone, Static Routing 셋팅
 Swagger-UI gradle 의존성은 불필요하며 standalone (HTML/CSS/JS) 파일들만 있으면 됩니다.
@@ -95,7 +93,8 @@ openapi3 {
 ```
 
 * gradle Tasks - documentation에 openapi, openapi3, postman Task가 기본으로 추가된 모습을 확인할 수 있습니다.
-  * ![](resources/documentation_tasks_3ea.png)
+
+![](resources/documentation_tasks_3ea.png)
 
 여기까지만 작업하고 Test 코드 없이 openapi3을 실행하면 /build/api-spec 디렉토리에 별 내용이 없는 openapi3.yaml이 생성됩니다.
 ```yaml
@@ -187,7 +186,7 @@ components:
 ```
 
 ### 4. 결론
-본 포스팅에서는 REST Docs의 장점과 Swagger의 장점을 갖춘 API 문서화를 구현해봤습니다. OAS 파일은 Postman, Paw, Insomnia 같은 API Client에서 Import하여 사용할 수 있는 장점 또한 있습니다. 옆자리 동료에게 공유해보세요. :) 마지막으로 실제 사용 전에 아래 주의사항을 확인해주세요.
+본 포스팅에서는 자주 비교되고 있는 REST Docs와 Swagger에서 장점만을 뽑아내어 API 문서화를 만들어봤습니다. OAS 파일은 Postman, Paw, Insomnia 같은 API Client에서 Import하여 사용할 수 있는 장점도 있습니다. 옆자리 동료에게 공유해보세요. :) 마지막으로 아래 주의사항을 확인해주시기 바랍니다.
 
 #### 4.1. 주의사항
 * 배포 환경에 따라 바로 사용하기 어렵거나 수정이 필요할 수 있습니다. 제가 다니는 회사의 배포 파이프라인에 맞춰 구성한 예제이므로 참고 부탁드립니다.
