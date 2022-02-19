@@ -23,7 +23,7 @@ REST Docs는 Integration 테스트를 작성해서 통과해야만 문서가 작
 
 ## 2. OpenApi Specification(OAS) 기반 API 문서화 
 Swagger 팀이 SmartBear에 합류하면서 Swagger Spec.이 OpenApi Spec.으로 명칭이 바뀌어 오늘날에는 RESTful API 스펙에 대한 사실상의 표준으로서 활용되고 있다고 합니다.
-Swagger-UI는 이 OAS 파일을 해석하여 API 스펙을 시각화해줍니다. 또한 Postman, Paw 같은 REST Clients들도 OAS를 지원하고 있어 OAS의 활용도가 무척 다양한 것을 알 수 있습니다.
+Swagger-UI는 이 OAS 파일을 해석하여 API 스펙을 시각화해줍니다. 또한 Postman, Paw 같은 REST Client들도 OAS를 지원하고 있어 OAS의 활용도가 무척 다양한 것을 알 수 있습니다.
 
 ### 2.1. REST Docs API specification Integration
 REST Docs와 Swagger의 장점을 어떻게 합칠 수 있을까요? 운이 좋게도 독일 기업 epages에서 Spring REST Docs를 연동하여 [OAS 파일을 만들어주는 오픈소스(restdocs-api-spec)](https://github.com/ePages-de/restdocs-api-spec "")를 제공하고 있습니다. 이 오픈소스를 이용해서 OAS 파일을 생성하고 Swagger-UI로 띄우면 되는 것입니다.
@@ -92,7 +92,7 @@ openapi3 {
 }
 ```
 
-* gradle Tasks - documentation에 openapi, openapi3, postman Task가 기본적으로 추가된 모습을 확인할 수 있습니다.
+* gradle Tasks - documentation에 openapi, openapi3, postman Task가 기본으로 추가된 모습을 확인할 수 있습니다.
   * ![](resources/documentation_tasks_3ea.png)
 
 여기까지만 작업하고 Test 코드 없이 openapi3을 실행하면 /build/api-spec 디렉토리에 별 내용이 없는 openapi3.yaml이 생성됩니다.
@@ -104,7 +104,7 @@ info:
   description: My API description
   version: 0.1.0
 servers:
-- url: https://localhost:8080
+- url: http://localhost:8080
 tags: []
 paths: {}
 components:
@@ -126,7 +126,7 @@ tasks.register<Copy>("copyOasToSwagger") {
 
 #### 2.2.4. MockMvc REST Docs Test 코드 작성
 MockMvc + MockMvcRestDocumentationWrapper를 이용하여 REST Docs [테스트케이스 샘플](src/test/kotlin/com/traeper/api_documentation/SampleControllerTest.kt "")을 작성하였습니다.
-Wrapper와 Snippet을 epages 라이브러리로 대신 사용하는 것 외에는 보통의 REST Docs와 큰 차이가 없으며 모양새도 거의 동일합니다.
+Wrapper와 Snippet을 epages 라이브러리로 대신 사용하는 것 외에는 REST Docs와 큰 차이가 없으며 모양새도 거의 동일합니다.
 
 ##### 2.2.4.1. 기존 REST Docs로 작성한 코드를 활용하려면
 Spring의 MockMvcRestDocumentation을 MockMvcRestDocumentationWrapper로 바꿔주기만 하면 됩니다.
@@ -142,7 +142,7 @@ copyOasToSwagger task를 수행한 다음 서버를 띄우면 Swagger가 잘 뜬
 
 ![](resources/swagger-result-2.png)
 
-OAS 파일이 생성되었습니다.
+* OAS 파일이 잘 생성되었습니다.
 ```yaml
 openapi: 3.0.1
 info:
@@ -185,7 +185,7 @@ components:
 ```
 
 ### 4. 결론
-REST Docs의 장점과 Swagger의 장점을 갖춘 API 문서화를 구현해봤습니다. OAS 파일을 Postman, Paw, Insomnia 같은 API Client에서 Import하여 사용할 수 있는 장점 또한 있습니다. 옆자리 동료에게 공유해보세요. :) 마지막으로 실제 사용 전에 아래 주의사항을 확인해주세요.
+본 포스팅에서는 REST Docs의 장점과 Swagger의 장점을 갖춘 API 문서화를 구현해봤습니다. OAS 파일은 Postman, Paw, Insomnia 같은 API Client에서 Import하여 사용할 수 있는 장점 또한 있습니다. 옆자리 동료에게 공유해보세요. :) 마지막으로 실제 사용 전에 아래 주의사항을 확인해주세요.
 
 #### 4.1. 주의사항
 * 배포 환경에 따라 바로 사용하기 어렵거나 수정이 필요할 수 있습니다. 제가 다니는 회사의 배포 파이프라인에 맞춰 구성한 예제이므로 참고 부탁드립니다.
