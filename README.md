@@ -1,7 +1,7 @@
 # OpenApiSpec.을 이용한 더욱 효과적인 API 문서화
 ![](resources/swagger-restdocs-love.png)
 
-API 서버를 개발하게 되면 App, Frontend 그리고 동료 Backend 개발자와 API 형상을 공유하고 편하게 테스트할 수 있는 환경 API 문서를 제공해주는 것이 협업의 첫 걸음이라고 할 수 있을 것 같습니다.
+API 서버를 개발하게 되면 App, Frontend 그리고 동료 Backend 개발자와 API 형상을 공유하고 편하게 테스트할 수 있는 API 문서를 제공해주는 것이 협업의 첫 걸음이라고 할 수 있을 것 같습니다.
 API 문서를 만들기 위해 Swagger나 REST Docs를 많이 사용하는데요. 본 글에서는 자주 비교되곤 하는 Swagger와 REST Docs의 장점만을 뽑아낸 OpenApi Spec.(OAS) 기반의 API 문서화 방법을 공유드리고자 합니다.
  
 ## 1. API 문서화 도구
