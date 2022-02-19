@@ -1,4 +1,4 @@
-# 더욱 효과적인 Restful API 문서화
+# OpenApiSpec.을 이용한 더욱 효과적인 API 문서화
 API 서버를 개발하게 되면 App, Frontend 그리고 동료 백엔드 개발자와 API 형상을 공유하고 편하게 테스트할 수 있는 환경을 제공해주는 것이 협업의 첫 걸음이라고 할 수 있습니다. 
 Spring 기반 실무에선 Swagger나 REST Docs를 많이 사용하는데 각각 장점과 단점이 분명하게 있는데요. 본 글에서는 Swagger와 REST Docs의 장점만을 뽑아낸 OpenApi Spec.(OAS) 기반의 API 문서화 방법을 공유드리고자 합니다.
  
